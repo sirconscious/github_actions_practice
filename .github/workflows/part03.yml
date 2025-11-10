@@ -27,4 +27,6 @@ jobs:
         needs: 
             - job-3 
         steps:
-            - run : echo "they form a directed acyclic graph  dag"
+            - run : echo "they form a directed acyclic graph  dag" 
+            - run : print("hello form job4") 
+              shell : python
