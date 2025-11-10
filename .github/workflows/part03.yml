@@ -1,32 +1,33 @@
-name: part03 
+name: part03
 
-on: 
-    workflow_dispatch: 
+on:
+  workflow_dispatch:
+
 jobs:
-    job-1:
-        runs-on: ubuntu 24.04 
-        steps:
-            - run : echo "this is the job1"
-            - run : echo "this is the job1" 
-            - run : echo "this is the job1" 
-    job-2:
-        runs-on: ubuntu 24.04 
-        steps:
-            - run : echo "this is the job3" 
-            - run : echo "this is the job3" 
-            - run : echo "this is the job4" 
-    job-3:
-        runs-on: ubuntu 24.04
-        needs: 
-            - job-1 
-            - job-2 
-        steps:
-            - run : echo "jobs can depend on one another" 
-    job-4:
-        runs-on: ubuntu 24.04
-        needs: 
-            - job-3 
-        steps:
-            - run : echo "they form a directed acyclic graph  dag" 
-            - run : print("hello form job4") 
-              shell : python
+  job-1:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "this is the job1"
+      - run: echo "this is the job1"
+      - run: echo "this is the job1"
+
+  job-2:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "this is the job2"
+      - run: echo "this is the job3"
+      - run: echo "this is the job4"
+
+  job-3:
+    runs-on: ubuntu-24.04
+    needs: [job-1, job-2]
+    steps:
+      - run: echo "jobs can depend on one another"
+
+  job-4:
+    runs-on: ubuntu-24.04
+    needs: [job-3]
+    steps:
+      - run: echo "they form a directed acyclic graph (DAG)"
+      - run: print("hello from job4")
+        shell: python
